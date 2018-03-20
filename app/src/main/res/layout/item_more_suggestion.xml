@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.captain_miao.optroundcardview.OptRoundCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:optRoundCardElevation="@dimen/slight_elevation">
+
+    <RelativeLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content">
+
+        <com.gelostech.pocketbartender.commoners.SquareLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/main_square">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/more_cocktail_image"
+                android:scaleType="fitXY"/>
+
+        </com.gelostech.pocketbartender.commoners.SquareLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/main_square"
+            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/more_title"
+            android:layout_marginBottom="5dp"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+    </RelativeLayout>
+
+</com.github.captain_miao.optroundcardview.OptRoundCardView>

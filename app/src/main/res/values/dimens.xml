@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="no_elevation">0dp</dimen>
+    <dimen name="spacing">5dp</dimen>
+    <dimen name="slight_elevation">0.75dp</dimen>
+</resources>

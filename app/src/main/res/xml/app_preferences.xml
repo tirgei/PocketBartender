@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="Appearance">
+
+        <com.kizitonwose.colorpreferencecompat.ColorPreferenceCompat
+            android:key="color_picker"
+            android:defaultValue="@color/colorAccent"
+            android:title="@string/theme"
+            android:summary="@string/theme_summary"
+            app:colorShape="circle"
+            app:showDialog="true"
+            app:viewSize="normal"
+            app:colorChoices="@array/theme_colors"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/app_name">
+
+        <Preference
+            android:key="about"
+            android:title="About"
+            android:summary="About Pocket Bartender"/>
+
+        <Preference
+            android:key="send_link"
+            android:title="Share this application"
+            android:summary="Share the download link to friends" />
+
+        <Preference
+            android:key="contact_dev"
+            android:title="Email Developer"
+            android:summary="Provide feedback to the app developer" />
+
+    </PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

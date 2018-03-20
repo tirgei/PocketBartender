@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gelostech.pocketbartender.activities.CocktailActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <com.gelostech.pocketbartender.commoners.SquareLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cocktail_square">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/cocktail_image" />
+
+            </com.gelostech.pocketbartender.commoners.SquareLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_below="@+id/cocktail_square"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/ingredients"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:id="@+id/cocktail_ingredients_title"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/cocktail_ingredients_rv"
+                android:layout_below="@+id/cocktail_ingredients_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_below="@+id/cocktail_ingredients_rv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/steps"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:id="@+id/cocktail_method_title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_below="@+id/cocktail_method_title"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:id="@+id/cocktail_steps"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:layout_below="@+id/cocktail_steps"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/more"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:id="@+id/cocktail_more_title"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cocktail_more_title"
+                android:id="@+id/cocktail_more_rv"
+                android:overScrollMode="never"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="17sp"
+                android:text="No suggestions for this cocktail :("
+                android:layout_below="@+id/cocktail_more_title"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="gone"
+                android:id="@+id/cocktail_more_null"/>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.github.captain_miao.optroundcardview.OptRoundCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        app:optRoundCardCornerRadius="10dp">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cocktail_toolbar"
+            style="?android:actionBarStyle"
+            android:background="@android:color/transparent"
+            android:elevation="@dimen/no_elevation"
+            android:theme="@style/ToolbarStyle"
+            tools:targetApi="lollipop">
+
+            <!-- TODO create v21 -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:maxLines="1"
+                android:textColor="@color/colorAccent"
+                android:text="@string/faves"
+                android:id="@+id/cocktail_title"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+</RelativeLayout>

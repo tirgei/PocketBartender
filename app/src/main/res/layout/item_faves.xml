@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.captain_miao.optroundcardview.OptRoundCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    app:layout_goneMarginBottom="10dp"
+    app:optRoundCardElevation="@dimen/no_elevation"
+    android:id="@+id/faves_card"
+    android:background="@color/dark_gray">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.gelostech.pocketbartender.commoners.SquareLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/faves_square">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:id="@+id/faves_image"/>
+
+        </com.gelostech.pocketbartender.commoners.SquareLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/faves_item_name"
+            android:layout_toRightOf="@+id/faves_square"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:id="@+id/faves_select"/>
+
+    </RelativeLayout>
+
+</com.github.captain_miao.optroundcardview.OptRoundCardView>
