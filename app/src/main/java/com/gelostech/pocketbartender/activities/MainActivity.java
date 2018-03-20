@@ -1,22 +1,21 @@
 package com.gelostech.pocketbartender.activities;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.gelostech.pocketbartender.R;
+import com.gelostech.pocketbartender.commoners.PagerAdapter;
 import com.gelostech.pocketbartender.fragments.FavesFragment;
-import com.gelostech.pocketbartender.fragments.FavesFragment_ViewBinding;
 import com.gelostech.pocketbartender.fragments.HomeFragment;
 import com.gelostech.pocketbartender.fragments.SearchFragment;
 import com.gelostech.pocketbartender.fragments.SettingsFragment;
@@ -26,12 +25,18 @@ import com.mikepenz.ionicons_typeface_library.Ionicons;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener, AHBottomNavigation.OnNavigationPositionListener{
+public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener,
+        AHBottomNavigation.OnNavigationPositionListener, ViewPager.OnPageChangeListener{
     private Boolean isDoubleBack = false;
     private FragmentTransaction ft;
+    private FragmentManager fm;
+    private HomeFragment homeFragment;
+    private SearchFragment searchFragment;
+    private FavesFragment favesFragment;
+    private SettingsFragment settingsFragment;
 
     @BindView(R.id.bottom_navbar) AHBottomNavigation navigationBar;
-
+    @BindView(R.id.main_vp) ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         ButterKnife.bind(this);
 
         initViews();
-        getSupportFragmentManager().beginTransaction().add(R.id.view_holder, new HomeFragment()).commit();
+        setupViewPager(viewPager);
     }
 
     private void initViews(){
@@ -63,41 +68,31 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         navigationBar.setOnNavigationPositionListener(this);
     }
 
+    private void setupViewPager(ViewPager viewPager) {
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), this);
+        homeFragment = new HomeFragment();
+        searchFragment = new SearchFragment();
+        favesFragment = new FavesFragment();
+        settingsFragment = new SettingsFragment();
+
+        adapter.addAllFrags(homeFragment, searchFragment, favesFragment, settingsFragment);
+        adapter.addAllTitles("Home", "Search", "Faves", "Settings");
+
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(this);
+    }
+
     @Override
     public boolean onTabSelected(int position, boolean wasSelected) {
-        switch (position){
-            case 0:
-                switchView(new HomeFragment());
-                break;
-
-            case 1:
-                switchView(new SearchFragment());
-                break;
-
-            case 2:
-                switchView(new FavesFragment());
-                break;
-
-            case 3:
-                switchView(new SettingsFragment());
-                break;
-
-            default:
-                break;
-        }
+        viewPager.setCurrentItem(position);
         return true;
     }
 
     @Override
     public void onPositionChange(int y) {
-
+        viewPager.setCurrentItem(y);
     }
 
-    private void switchView(Fragment fragment){
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.view_holder, fragment);
-        ft.commit();
-    }
 
     @Override
     public void onBackPressed() {
@@ -119,6 +114,24 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
     }
 
     @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //navigationBar.setCurrentItem(position);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        navigationBar.setCurrentItem(position);
+
+
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
     }
@@ -132,8 +145,4 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
     protected void onDestroy() {
         super.onDestroy();
     }
-
-
-
-
 }

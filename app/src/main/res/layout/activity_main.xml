@@ -7,11 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.gelostech.pocketbartender.activities.MainActivity">
 
-    <FrameLayout
+    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navbar"
-        android:id="@+id/view_holder"/>
+        android:id="@+id/main_vp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_alignParentTop="true"/>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
         android:layout_width="match_parent"
