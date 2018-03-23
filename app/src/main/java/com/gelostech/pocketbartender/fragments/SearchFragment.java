@@ -1,22 +1,16 @@
 package com.gelostech.pocketbartender.fragments;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,16 +32,11 @@ import com.gelostech.pocketbartender.commoners.BartenderSingleton;
 import com.gelostech.pocketbartender.commoners.BartenderUtil;
 import com.gelostech.pocketbartender.commoners.PillNode;
 import com.gelostech.pocketbartender.models.HomeModel;
-import com.mikepenz.iconics.IconicsDrawable;
-import com.mikepenz.ionicons_typeface_library.Ionicons;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
