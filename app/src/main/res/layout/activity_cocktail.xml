@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gelostech.pocketbartender.activities.CocktailActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/cocktail_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title">
+
+
+            <ImageView
+                android:id="@+id/cocktail_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                android:src="@drawable/loading" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/cocktail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -17,25 +53,10 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp">
 
-            <com.gelostech.pocketbartender.commoners.SquareLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/cocktail_square">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="centerCrop"
-                    android:id="@+id/cocktail_image" />
-
-            </com.gelostech.pocketbartender.commoners.SquareLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:layout_below="@+id/cocktail_square"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/ingredients"
@@ -72,7 +93,9 @@
                 android:layout_below="@+id/cocktail_method_title"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingMultiplier="1.1"
                 android:id="@+id/cocktail_steps"/>
 
             <TextView
@@ -113,38 +136,4 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <com.github.captain_miao.optroundcardview.OptRoundCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentTop="true"
-        app:optRoundCardCornerRadius="10dp">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cocktail_toolbar"
-            style="?android:actionBarStyle"
-            android:background="@android:color/transparent"
-            android:elevation="@dimen/no_elevation"
-            android:theme="@style/ToolbarStyle"
-            tools:targetApi="lollipop">
-
-            <!-- TODO create v21 -->
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="18sp"
-                android:maxLines="1"
-                android:textColor="@color/colorAccent"
-                android:text="@string/faves"
-                android:id="@+id/cocktail_title"/>
-
-        </android.support.v7.widget.Toolbar>
-
-    </com.github.captain_miao.optroundcardview.OptRoundCardView>
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

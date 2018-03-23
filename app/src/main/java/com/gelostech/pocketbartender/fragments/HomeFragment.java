@@ -1,13 +1,17 @@
 package com.gelostech.pocketbartender.fragments;
 
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -97,12 +101,14 @@ public class HomeFragment extends Fragment {
 
         cocktails = new ArrayList<>();
         homeAdapter = new HomeAdapter(getActivity(), cocktails, new HomeAdapter.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(HomeModel model) {
                 Intent intent = new Intent(getActivity(), CocktailActivity.class);
                 intent.putExtra("cocktail", model);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.enter_b, R.anim.exit_a);
+
             }
         });
         rv.setAdapter(homeAdapter);

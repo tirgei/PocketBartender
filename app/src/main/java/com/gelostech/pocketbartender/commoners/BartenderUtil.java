@@ -20,6 +20,7 @@ public class BartenderUtil {
     public static final String HOME_NON_ALCOHOLIC = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic";
     public static final String COCKTAIL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
     public static final String MORE_COCKTAILS = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
+    public static final String SEARCH_URL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
     private List<HomeModel> cocktails;
 
     public BartenderUtil(){}

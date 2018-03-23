@@ -56,6 +56,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertIntoDb(int id, String name, String url, Bitmap image){
         SQLiteDatabase db = this.getWritableDatabase();
 
+        if(hasObject(String.valueOf(id), FAVES_TABLE))
+            deleteRow(String.valueOf(id), FAVES_TABLE);
+
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put(ID, id);

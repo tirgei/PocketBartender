@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,12 +52,12 @@ import butterknife.ButterKnife;
 
 public class CocktailActivity extends AppCompatActivity {
     @BindView(R.id.cocktail_toolbar) Toolbar toolbar;
-    @BindView(R.id.cocktail_title) TextView cocktailTitle;
     @BindView(R.id.cocktail_image) ImageView imageView;
     @BindView(R.id.cocktail_ingredients_rv) RecyclerView rv;
     @BindView(R.id.cocktail_steps) TextView cocktailSteps;
     @BindView(R.id.cocktail_more_rv) RecyclerView moreRV;
     @BindView(R.id.cocktail_more_null) TextView noCocktail;
+    @BindView(R.id.toolbar_layout) CollapsingToolbarLayout toolbarLayout;
 
     private Drawable favedItem, unfavedItem;
     private CocktailIngredientsAdapter ingredientsAdapter;
@@ -91,12 +92,13 @@ public class CocktailActivity extends AppCompatActivity {
 
     private void initViews(HomeModel model){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(new IconicsDrawable(this).icon(Ionicons.Icon.ion_ios_close_empty).sizeDp(16).color(Color.GRAY));
+        toolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        toolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
-        cocktailTitle.setText(model.getName());
+        getSupportActionBar().setTitle(model.getName());
         Glide.with(this).setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.loading)).load(model.getImageUrl()).thumbnail(0.1f).into(imageView);
 
         moreCocktails = new ArrayList<>();
@@ -142,7 +144,7 @@ public class CocktailActivity extends AppCompatActivity {
                         }
                     }
 
-                    cocktailSteps.setText(model.getStrInstructions());
+                    cocktailSteps.setText(model.getStrInstructions().replace(". ", ".\n"));
                     suggestions(cocktailObject.getString("strIngredient1"), cocktailObject.getInt("idDrink"));
                 } catch (JSONException e) {
                     e.printStackTrace();
