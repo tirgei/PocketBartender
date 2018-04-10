@@ -2,18 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gelostech.pocketbartender.fragments.HomeFragment">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/home_toolbar"
+        android:id="@+id/homeToolbar"
         style="?android:actionBarStyle"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:elevation="@dimen/no_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        tools:targetApi="lollipop">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <!-- TODO create v21 -->
 
@@ -24,8 +24,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:text="@string/cocktails"
-            android:id="@+id/home_title"/>
+            android:id="@+id/homeToolbarTitle"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -33,16 +32,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/home_loading"/>
+        android:id="@+id/homeLoading"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/home_toolbar"
         android:visibility="gone"
         android:overScrollMode="never"
         android:clipToPadding="false"
         android:padding="@dimen/spacing"
-        android:id="@+id/home_rv"/>
+        android:id="@+id/homeCocktailsRv"
+        android:layout_below="@id/homeToolbar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:id="@+id/homeNoInternet"
+        android:text="@string/no_internet"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

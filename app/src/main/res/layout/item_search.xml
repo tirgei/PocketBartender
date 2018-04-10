@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.gelostech.pocketbartender.commoners.SquareLayout
+        <com.gelostech.pocketbartender.utils.SquareLayout
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/search_square">
@@ -26,7 +26,7 @@
                 android:scaleType="centerCrop"
                 android:id="@+id/search_thumb"/>
 
-        </com.gelostech.pocketbartender.commoners.SquareLayout>
+        </com.gelostech.pocketbartender.utils.SquareLayout>
 
         <TextView
             android:layout_width="wrap_content"

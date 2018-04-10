@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
-    <TextView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:id="@+id/history_icon"
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/search_history_icon"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"/>
 
@@ -17,9 +18,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/history_title"
         android:layout_centerVertical="true"
-        android:textColor="@color/lightGray"
+        android:textColor="@color/dark_gray"
         android:textSize="17sp"
-        android:layout_toRightOf="@+id/history_icon"
-        android:layout_marginLeft="5dp"/>
+        android:layout_toRightOf="@id/search_history_icon"
+        android:layout_marginLeft="10dp"/>
 
 </RelativeLayout>

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.gelostech.pocketbartender.commoners.SquareLayout
+        <com.gelostech.pocketbartender.utils.SquareLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/main_square">
@@ -18,9 +18,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/home_cocktail_image" />
+                android:id="@+id/homeCocktailImage" />
 
-        </com.gelostech.pocketbartender.commoners.SquareLayout>
+        </com.gelostech.pocketbartender.utils.SquareLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_marginLeft="5dp"
             android:layout_below="@id/main_square"
             android:textColor="@color/colorPrimaryDark"
-            android:id="@+id/home_title"
+            android:id="@+id/homeCocktailTitle"
             android:layout_marginBottom="5dp"
             android:maxLines="1"
             android:ellipsize="end"/>

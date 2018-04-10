@@ -1,22 +1,20 @@
 package com.gelostech.pocketbartender.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gelostech.pocketbartender.R;
-import com.gelostech.pocketbartender.commoners.BartenderUtil;
-import com.gelostech.pocketbartender.models.FavesModel;
 import com.gelostech.pocketbartender.models.HomeModel;
 import com.github.captain_miao.optroundcardview.OptRoundCardView;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -50,7 +48,7 @@ public class FavesAdapter extends RecyclerView.Adapter<FavesAdapter.FavesViewHol
             super(itemView);
 
             image = itemView.findViewById(R.id.faves_image);
-            faveItem = itemView.findViewById(R.id.faves_select);
+            faveItem = itemView.findViewById(R.id.faves_set_status);
             itemName = itemView.findViewById(R.id.faves_item_name);
             card = itemView.findViewById(R.id.faves_card);
             listenerRef = new WeakReference<>(listener);
@@ -73,11 +71,17 @@ public class FavesAdapter extends RecyclerView.Adapter<FavesAdapter.FavesViewHol
         }
     }
 
+    public void removeFave(int pos){
+        faves.remove(pos);
+        notifyDataSetChanged();
+    }
+
     public FavesAdapter(Context context, List<HomeModel> faves, OnItemClickListener listener){
         this.context = context;
         this.faves = faves;
         this.listener = listener;
     }
+
 
     @NonNull
     @Override
@@ -92,7 +96,7 @@ public class FavesAdapter extends RecyclerView.Adapter<FavesAdapter.FavesViewHol
         HomeModel model = faves.get(position);
 
         holder.itemName.setText(model.getName());
-        Glide.with(context).load(BartenderUtil.getImage(model.getCocktailThumb())).thumbnail(0.1f).into(holder.image);
+        Glide.with(context).load(getImage(model.getCocktailThumb())).thumbnail(0.1f).into(holder.image);
         holder.faveItem.setImageDrawable(new IconicsDrawable(context).icon(Ionicons.Icon.ion_ios_heart).color(ContextCompat.getColor(context, R.color.faveItem)).sizeDp(24));
         holder.bind(model);
     }
@@ -105,5 +109,9 @@ public class FavesAdapter extends RecyclerView.Adapter<FavesAdapter.FavesViewHol
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
+    }
+
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 }

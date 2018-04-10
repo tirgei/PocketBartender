@@ -12,6 +12,7 @@ public class HomeModel implements Serializable{
     private String imageUrl;
     private int id;
     private byte[] cocktailThumb;
+    private int type;
 
     public HomeModel(){}
 
@@ -52,5 +53,13 @@ public class HomeModel implements Serializable{
 
     public int getId() {
         return id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

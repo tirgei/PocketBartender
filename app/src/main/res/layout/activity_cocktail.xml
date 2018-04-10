@@ -13,7 +13,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/cocktailToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -23,7 +23,7 @@
 
 
             <ImageView
-                android:id="@+id/cocktail_image"
+                android:id="@+id/cocktailImage"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
@@ -32,7 +32,7 @@
                 android:src="@drawable/loading" />
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/cocktail_toolbar"
+                android:id="@+id/cocktailToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -46,7 +46,9 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:id="@+id/cocktailDetails"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,59 +65,59 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:alpha="0.6"
-                android:id="@+id/cocktail_ingredients_title"/>
+                android:id="@+id/cocktailIngredientsTitle"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:id="@+id/cocktail_ingredients_rv"
-                android:layout_below="@+id/cocktail_ingredients_title"/>
+                android:id="@+id/cocktailIngredientsRv"
+                android:layout_below="@+id/cocktailIngredientsTitle"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:layout_below="@+id/cocktail_ingredients_rv"
+                android:layout_below="@+id/cocktailIngredientsRv"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/steps"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:alpha="0.6"
-                android:id="@+id/cocktail_method_title"/>
+                android:id="@+id/cocktailStepsTitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:layout_below="@+id/cocktail_method_title"
+                android:layout_below="@+id/cocktailStepsTitle"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:lineSpacingMultiplier="1.1"
-                android:id="@+id/cocktail_steps"/>
+                android:id="@+id/cocktailSteps"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:layout_below="@+id/cocktail_steps"
+                android:layout_below="@+id/cocktailSteps"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/more"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:alpha="0.6"
-                android:id="@+id/cocktail_more_title"/>
+                android:id="@+id/cocktailMoreTitle"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cocktail_more_title"
-                android:id="@+id/cocktail_more_rv"
+                android:layout_below="@id/cocktailMoreTitle"
+                android:id="@+id/cocktailMoreRv"
                 android:overScrollMode="never"
                 android:visibility="gone"/>
 
@@ -125,12 +127,12 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="17sp"
                 android:text="No suggestions for this cocktail :("
-                android:layout_below="@+id/cocktail_more_title"
+                android:layout_below="@+id/cocktailMoreTitle"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:visibility="gone"
-                android:id="@+id/cocktail_more_null"/>
+                android:id="@+id/cocktailMoreNull"/>
 
         </RelativeLayout>
 

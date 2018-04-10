@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/faves_toolbar"
+        android:id="@+id/favesToolbar"
         style="?android:actionBarStyle"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
@@ -24,8 +24,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:text="@string/faves"
-            android:id="@+id/faves_title"/>
+            android:id="@+id/favesToolbarTitle"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -33,15 +32,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/faves_loading"
-        android:visibility="visible"/>
+        android:id="@+id/favesLoading"
+        android:visibility="visible"/>android
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:layout_below="@+id/faves_toolbar"
-        android:id="@+id/faves_rv"
+        android:id="@+id/favesRv"
+        android:layout_below="@id/favesToolbar"
         android:clipToPadding="false"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -50,8 +49,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/no_faves_tv"
-        android:text="No cocktails favorited yet :("
+        android:id="@+id/favesNoContent"
+        android:textSize="17sp"
+        android:text="@string/no_faves"
         android:layout_centerInParent="true"
         android:visibility="gone"/>
 

@@ -2,43 +2,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gelostech.pocketbartender.fragments.SearchFragment">
+    tools:context="com.gelostech.pocketbartender.fragments.SearchFragment"
+    android:animateLayoutChanges="true">
 
-    <com.gelostech.pocketbartender.commoners.PillNode
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="64dp"
-        android:id="@+id/search_pill"
-        android:visibility="gone"/>
+        android:id="@+id/searchFrame">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchToolbar"
+            style="?android:actionBarStyle"
+            android:background="@color/colorPrimary"
+            android:elevation="@dimen/no_elevation"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <!-- TODO create v21 -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:id="@+id/searchToolbarTitle"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchView"/>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/searchingLayout"
+        android:visibility="gone"
+        android:layout_below="@id/searchFrame">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/searchingIcon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginLeft="30dp"
+            android:text="Searching..."
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/searchingIcon"/>
+
+        <ProgressBar
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/recycler_divider"/>
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/search_pill"
+        android:layout_below="@id/searchingLayout"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="64dp"
-        android:id="@+id/search_rv"/>
+        android:id="@+id/searchRv" />
 
-    <com.arlib.floatingsearchview.FloatingSearchView
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/search_view"
-        android:layout_alignParentTop="true"
-        app:floatingSearch_searchBarMarginLeft="10dp"
-        app:floatingSearch_searchBarMarginRight="10dp"
-        app:floatingSearch_searchBarMarginTop="5dp"
-        app:floatingSearch_suggestionsListAnimDuration="250"
-        app:floatingSearch_close_search_on_keyboard_dismiss="true"
-        app:floatingSearch_showSearchKey="true"
-        app:floatingSearch_showVoiceInput="true"
-        app:floatingSearch_leftActionMode="showSearch"
-        app:floatingSearch_searchHint="Search..."
-        app:floatingSearch_backgroundColor="@color/veryLightGray"
-        app:elevation="@dimen/slight_elevation"/>
+        android:id="@+id/noSearchHistory"
+        android:textSize="17sp"
+        android:text="@string/no_history"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

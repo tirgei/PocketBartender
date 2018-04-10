@@ -10,8 +10,8 @@
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navbar"
-        android:id="@+id/main_vp"
+        android:layout_above="@id/bottomNavBar"
+        android:id="@+id/viewPager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_alignParentTop="true"/>
 
@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:elevation="@dimen/no_elevation"
         android:layout_alignParentBottom="true"
-        android:id="@+id/bottom_navbar"/>
+        android:id="@+id/bottomNavBar"/>
 
 </RelativeLayout>

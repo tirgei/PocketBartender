@@ -1,4 +1,4 @@
-package com.gelostech.pocketbartender.commoners;
+package com.gelostech.pocketbartender.utils;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -14,17 +14,14 @@ import java.util.List;
  */
 public class PagerAdapter extends FragmentPagerAdapter {
 
-    List<Fragment> fragments = new ArrayList<>();
-    List<String> titles = new ArrayList<>();
-    Context context;
-
-
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<String> titles = new ArrayList<>();
+    private Context context;
 
     public PagerAdapter(FragmentManager fm,Context context) {
         super(fm);
         this.context = context;
     }
-
 
     public void addTitle(String title){
         titles.add(title);

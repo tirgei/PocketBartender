@@ -4,12 +4,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,13 +31,42 @@ import butterknife.ButterKnife;
  * Created by tirgei on 3/4/18.
  */
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<HomeModel> cocktails;
     private OnSearchResultClick resultClick;
+    private OnSearchHistoryClick historyClick;
 
     public interface OnSearchResultClick{
         void onSearchResultClick(HomeModel model);
+    }
+
+    public interface OnSearchHistoryClick{
+        void onSearchHistoryClick(HomeModel model);
+    }
+
+    public class SearchHistoryViewHolder extends RecyclerView.ViewHolder{
+        private ImageView historyIcon;
+        private TextView name;
+
+        public SearchHistoryViewHolder(View itemView) {
+            super(itemView);
+            historyIcon = itemView.findViewById(R.id.search_history_icon);
+            historyIcon.setImageDrawable(new IconicsDrawable(context).icon(Ionicons.Icon.ion_ios_reload).color(ContextCompat.getColor(context, R.color.dark_gray)).sizeDp(20));
+            name = itemView.findViewById(R.id.history_title);
+        }
+
+        public void bind(final HomeModel model, final OnSearchHistoryClick onSearchHistoryClick){
+            name.setText(model.getName());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSearchHistoryClick.onSearchHistoryClick(model);
+                }
+            });
+        }
+
     }
 
     public class SearchViewHolder extends RecyclerView.ViewHolder{
@@ -47,20 +79,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             name = itemView.findViewById(R.id.search_item_name);
         }
 
-        public void bind(final HomeModel model, final OnSearchResultClick click){
+        public void bind(final HomeModel model, final OnSearchResultClick onSearchResultClick){
+            Glide.with(context).setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.loading)).load(model.getImageUrl()).thumbnail(0.05f).into(imageView);
+            name.setText(model.getName());
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    click.onSearchResultClick(model);
+                    onSearchResultClick.onSearchResultClick(model);
                 }
             });
         }
     }
 
-    public SearchAdapter(Context context, OnSearchResultClick resultClick){
+    public SearchAdapter(Context context, OnSearchResultClick resultClick, OnSearchHistoryClick historyClick){
         this.context = context;
         this.cocktails = new ArrayList<>();
         this.resultClick = resultClick;
+        this.historyClick = historyClick;
     }
 
     public void addCocktail(HomeModel model){
@@ -70,24 +106,36 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     public void clear(){
         cocktails.clear();
-        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new SearchViewHolder(v);
+        if (viewType == 0){
+            return new SearchHistoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_history, parent, false));
+        } else {
+            return new SearchViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false));
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        HomeModel model = cocktails.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        Glide.with(context).setDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.loading)).load(model.getImageUrl()).thumbnail(0.05f).into(holder.imageView);
-        holder.name.setText(model.getName());
-        holder.bind(model, resultClick);
+        switch (holder.getItemViewType()){
+            case 0:
+                ((SearchHistoryViewHolder)holder).bind(cocktails.get(position), historyClick);
+                break;
+
+            case 1:
+                ((SearchViewHolder)holder).bind(cocktails.get(position), resultClick);
+                break;
+
+            default:
+                break;
+
+
+        }
 
     }
 
@@ -98,6 +146,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        HomeModel model = cocktails.get(position);
+
+        if(model.getType() == 0)
+            return 0;
+        else
+            return 1;
     }
 }

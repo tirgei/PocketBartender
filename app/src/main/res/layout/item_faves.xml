@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.gelostech.pocketbartender.commoners.SquareLayout
+        <com.gelostech.pocketbartender.utils.SquareLayout
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/faves_square">
@@ -25,7 +25,7 @@
                 android:scaleType="fitXY"
                 android:id="@+id/faves_image"/>
 
-        </com.gelostech.pocketbartender.commoners.SquareLayout>
+        </com.gelostech.pocketbartender.utils.SquareLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,6 +34,7 @@
             android:id="@+id/faves_item_name"
             android:layout_toRightOf="@+id/faves_square"
             android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@id/faves_set_status"
             android:textColor="@color/colorPrimaryDark"/>
 
         <ImageButton
@@ -42,7 +43,7 @@
             android:background="@android:color/transparent"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
-            android:id="@+id/faves_select"/>
+            android:id="@+id/faves_set_status"/>
 
     </RelativeLayout>
 

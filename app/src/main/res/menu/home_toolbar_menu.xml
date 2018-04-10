@@ -4,6 +4,7 @@
     <item
         android:title="@string/filter_cocktails"
         android:id="@+id/filter_home"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:orderInCategory="100"/>
 
 </menu>

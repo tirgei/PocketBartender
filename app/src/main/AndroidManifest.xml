@@ -15,14 +15,16 @@
         android:theme="@style/MyMaterialTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CocktailActivity"></activity>
+        <activity android:name=".activities.CocktailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

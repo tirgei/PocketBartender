@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/settings_toolbar"
+        android:id="@+id/settingsToolbar"
         style="?android:actionBarStyle"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
@@ -24,15 +24,14 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:text="@string/settings"
-            android:id="@+id/settings_title"/>
+            android:id="@+id/settingsToolbarTitle"/>
 
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/settings_toolbar"
-        android:id="@+id/preferences_holder"/>
+        android:id="@+id/preferences_holder"
+        android:layout_below="@id/settingsToolbar"/>
 
 </RelativeLayout>

@@ -7,12 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.gelostech.pocketbartender.models.FavesModel;
 import com.gelostech.pocketbartender.models.HomeModel;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "pocket_bartender";
-    private static final String FAVES_TABLE = "fave_cocktails", HISTORY_TABLE = "search_history";
+    public static final String FAVES_TABLE = "fave_cocktails", HISTORY_TABLE = "search_history";
     private static final String NAME = "cocktail_name";
     private static final String ID = "cocktail_id";
     private static final String URL = "cocktail_url";
@@ -33,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + ID + " TEXT," + NAME + " TEXT," + URL + " TEXT,"+ IMAGE_THUMBNAIL + " BLOB);";
 
     private static final String CREATE_HISTORY_TABLE = "CREATE TABLE " + HISTORY_TABLE + "("
-            + ID + " TEXT," + NAME + " TEXT);";
+            + ID + " TEXT," + NAME + " TEXT," + URL + " TEXT);";
 
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -64,7 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(ID, id);
             contentValues.put(NAME, name);
             contentValues.put(URL, url);
-            contentValues.put(IMAGE_THUMBNAIL, BartenderUtil.getBytes(image));
+            contentValues.put(IMAGE_THUMBNAIL, getBytes(image));
             db.insert(FAVES_TABLE, null, contentValues);
             db.close();
 
@@ -74,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addHistory(String id, String name){
+    public void addHistory(String id, String name, String imageUrl){
         SQLiteDatabase db = this.getWritableDatabase();
 
         if(hasObject(id, HISTORY_TABLE))
@@ -84,6 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put(ID, id);
             contentValues.put(NAME, name);
+            contentValues.put(URL, imageUrl);
             db.insert(HISTORY_TABLE, null, contentValues);
             db.close();
 
@@ -93,9 +92,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
-    /*public List<FavesModel> fetchHistory(Context context){
-        List<FavesModel> models = new ArrayList<>();
+    public List<HomeModel> fetchHistory(){
+        List<HomeModel> models = new ArrayList<>();
 
         String query = "SELECT * FROM " + HISTORY_TABLE;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -103,9 +101,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()){
             do{
-                FavesModel model = new FavesModel();
-                model.setId(cursor.getString(0));
+                HomeModel model = new HomeModel();
+                model.setId(Integer.parseInt(cursor.getString(0)));
                 model.setName(cursor.getString(1));
+                model.setImageUrl(cursor.getString(2));
+                model.setType(0);
 
                 models.add(0, model);
             } while (cursor.moveToNext());
@@ -115,9 +115,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return models;
-    }*/
+    }
 
-    public List<HomeModel> fetchFaves(Context context){
+
+    public List<HomeModel> fetchFaves(){
         List<HomeModel> models = new ArrayList<>();
 
         String query = "SELECT * FROM " + FAVES_TABLE;
@@ -173,6 +174,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + table + " WHERE " + ID + "='" + id + "'");
+    }
+
+    public static byte[] getBytes(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 20, stream);
+        return stream.toByteArray();
     }
 
 }
