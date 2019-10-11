@@ -15,11 +15,11 @@ import java.io.ByteArrayOutputStream
  */
 object BartenderUtil{
 
-    const val HOME_ALCOHOLIC = "https://www.thecocktaildb.com/api/json/v1/9475/filter.php?a=Alcoholic"
-    const val HOME_NON_ALCOHOLIC = "https://www.thecocktaildb.com/api/json/v1/9475/filter.php?a=Non_Alcoholic"
-    const val COCKTAIL = "https://www.thecocktaildb.com/api/json/v1/9475/lookup.php?i="
-    const val MORE_COCKTAILS = "https://www.thecocktaildb.com/api/json/v1/9475/filter.php?i="
-    const val SEARCH_URL = "https://www.thecocktaildb.com/api/json/v1/9475/filter.php?i="
+    const val HOME_ALCOHOLIC = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
+    const val HOME_NON_ALCOHOLIC = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
+    const val COCKTAIL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="
+    const val MORE_COCKTAILS = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i="
+    const val SEARCH_URL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i="
     private const val KEY = "favedCocktails"
     const val FONT = "fonts/COCKB___.TTF"
 
