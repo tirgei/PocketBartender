@@ -4,8 +4,8 @@ import android.Manifest
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity(), AHBottomNavigation.OnTabSelectedListen
 
 
     override fun onBackPressed() {
-        if (viewPager.currentItem == 1 && !searchFragment!!.onBackPressed()) {
+        if (viewPager.currentItem == 1 && !searchFragment?.onBackPressed()!!) {
             return
 
         } else {

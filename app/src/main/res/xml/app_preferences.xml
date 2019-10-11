@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
         android:key="about"
         android:title="About"
         android:summary="About Pocket Bartender"/>
+
+    <Preference
+        android:key="more"
+        android:title="More apps"
+        android:summary="Check out more apps" />
 
     <Preference
         android:key="send_link"
@@ -22,4 +27,4 @@
         android:summary="Provide feedback to the app developer" />
 
 
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

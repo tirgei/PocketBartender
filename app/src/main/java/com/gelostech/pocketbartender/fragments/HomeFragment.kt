@@ -4,12 +4,15 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.wifi.WifiManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -17,9 +20,15 @@ import com.gelostech.pocketbartender.R
 import com.gelostech.pocketbartender.activities.CocktailActivity
 import com.gelostech.pocketbartender.activities.MainActivity
 import com.gelostech.pocketbartender.adapters.HomeAdapter
-import com.gelostech.pocketbartender.commoners.*
+import com.gelostech.pocketbartender.commoners.BartenderSingleton
+import com.gelostech.pocketbartender.commoners.BartenderUtil
 import com.gelostech.pocketbartender.models.HomeModel
 import com.gelostech.pocketbartender.utils.*
+import com.gelostech.pocketbartender.utils.PreferenceHelper.get
+import com.gelostech.pocketbartender.utils.PreferenceHelper.set
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.ionicons_typeface_library.Ionicons
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -27,17 +36,17 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.json.JSONException
 import org.json.JSONObject
 
-
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment(), MainActivity.ScrollToTopListener {
+class HomeFragment : Fragment(), MainActivity.ScrollToTopListener, OnShowcaseEventListener {
     private var cocktails: MutableList<HomeModel>? = null
     private var homeAdapter: HomeAdapter? = null
     private var cacheManager: CacheManager? = null
 
     companion object {
         private const val jsonName = "cocktails.json"
+        private var KEY = "first_launch"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +61,7 @@ class HomeFragment : Fragment(), MainActivity.ScrollToTopListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
-        loadCocktails(0)
+        loadCocktails(1)
     }
 
     private fun initViews(v: View) {
@@ -76,6 +85,19 @@ class HomeFragment : Fragment(), MainActivity.ScrollToTopListener {
         toolbar.inflateMenu(R.menu.home_toolbar_menu)
         val item = toolbar.menu.findItem(R.id.filter_home)
         item?.icon = IconicsDrawable(activity!!).icon(Ionicons.Icon.ion_ios_settings).sizeDp(24).color(ContextCompat.getColor(activity!!, R.color.colorAccent))
+
+        val prefs = PreferenceHelper.defaultPrefs(activity!!)
+        if (!prefs[KEY, false]) {
+            val target = ViewTarget(R.id.filter_home, activity)
+            ShowcaseView.Builder(activity)
+                    .withMaterialShowcase()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .setTarget(target)
+                    .setShowcaseEventListener(this)
+                    .setContentTitle("Filter")
+                    .setContentText("Tap here to filter cocktails by type i.e. alcoholic or non-alcoholic")
+                    .build()
+        }
 
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -198,6 +220,20 @@ class HomeFragment : Fragment(), MainActivity.ScrollToTopListener {
         activity!!.overridePendingTransition(R.anim.enter_b, R.anim.exit_a)
     }
 
+    override fun onShowcaseViewShow(showcaseView: ShowcaseView?) {
 
+    }
 
+    override fun onShowcaseViewHide(showcaseView: ShowcaseView?) {
+        val prefs = PreferenceHelper.defaultPrefs(activity!!)
+        prefs[KEY] = true
+    }
+
+    override fun onShowcaseViewDidHide(showcaseView: ShowcaseView?) {
+
+    }
+
+    override fun onShowcaseViewTouchBlocked(motionEvent: MotionEvent?) {
+
+    }
 }

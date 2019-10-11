@@ -42,4 +42,22 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="CustomShowcaseTheme" parent="ShowcaseView.Light">
+        <item name="sv_backgroundColor">#dc000000</item>
+        <item name="sv_showcaseColor">#00801A</item>
+        <item name="sv_buttonText">OK</item>
+        <item name="sv_tintButtonColor">true</item>
+        <item name="sv_titleTextAppearance">@style/CustomTitle</item>
+        <item name="sv_detailTextAppearance">@style/CustomDetail</item>
+
+    </style>
+
+    <style name="CustomTitle" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textColor">#eb273f</item>
+    </style>
+
+    <style name="CustomDetail" parent="TextAppearance.ShowcaseView.Detail">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>

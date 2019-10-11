@@ -3,8 +3,8 @@ package com.gelostech.pocketbartender.commoners;
 import android.content.Context
 import android.graphics.Color
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +26,7 @@ class PillNode(context: Context,attrs:AttributeSet?) : RecyclerView(context,attr
 
 
     init {
-        layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         setHasFixedSize(true)
         adapter = adp
     }

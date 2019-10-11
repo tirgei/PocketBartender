@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gelostech.pocketbartender.fragments.HomeFragment">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/homeToolbar"
@@ -26,7 +26,7 @@
             android:textColor="@color/colorAccent"
             android:id="@+id/homeToolbarTitle"/>
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/homeLoading"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"

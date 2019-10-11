@@ -4,10 +4,10 @@ package com.gelostech.pocketbartender.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.Toolbar
 import android.view.*
 import com.android.volley.Request
 import com.android.volley.Response
@@ -31,8 +31,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import com.gelostech.pocketbartender.commoners.DatabaseHelper
-import com.gelostech.pocketbartender.utils.snack
-import org.jetbrains.anko.toast
 
 
 /**
@@ -69,12 +67,12 @@ class SearchFragment : Fragment(), SearchAdapter.OnSearchResultClick, SearchAdap
 
         v.searchRv.setHasFixedSize(true)
         v.searchRv.layoutManager = LinearLayoutManager(context)
-        v.searchRv.addItemDecoration(RecyclerFormatter.SimpleDividerItemDecoration(activity!!))
+        v.searchRv.addItemDecoration(RecyclerFormatter.SimpleDividerItemDecoration(activity as MainActivity))
 
         searchAdapter = SearchAdapter(activity, this, this)
         v.searchRv.adapter = searchAdapter
 
-        v.searchingIcon.setImageDrawable(IconicsDrawable(activity!!).icon(Ionicons.Icon.ion_ios_search).sizeDp(22).color(ContextCompat.getColor(activity!!, R.color.dark_gray)))
+        v.searchingIcon.setImageDrawable(IconicsDrawable(activity as MainActivity).icon(Ionicons.Icon.ion_ios_search).sizeDp(22).color(ContextCompat.getColor(activity as MainActivity, R.color.dark_gray)))
     }
 
     private fun setupToolbar(toolbar: Toolbar, v: View) {
@@ -91,21 +89,21 @@ class SearchFragment : Fragment(), SearchAdapter.OnSearchResultClick, SearchAdap
 
         if(history.size > 0){
             with(history) {
-                forEach { searchAdapter!!.addCocktail(it) }
+                forEach { searchAdapter?.addCocktail(it) }
             }
         } else {
-            view?.noSearchHistory!!.visibility = View.VISIBLE
+            view?.noSearchHistory?.visibility = View.VISIBLE
         }
     }
 
-    private fun searchCocktails(name: String) {
-        searchAdapter!!.clear()
+    private fun searchCocktails(name: String?) {
+        searchAdapter?.clear()
 
         val fetchCocktails = JsonObjectRequest(Request.Method.GET, BartenderUtil.SEARCH_URL + name, null, Response.Listener { response ->
             try {
                 val cocktailArray = response.getJSONArray("drinks")
 
-                view?.noSearchHistory!!.visibility = View.GONE
+                view?.noSearchHistory?.visibility = View.GONE
 
                 for (i in 0 until cocktailArray.length()) {
                     val cocktailObject = cocktailArray.getJSONObject(i)
@@ -116,17 +114,17 @@ class SearchFragment : Fragment(), SearchAdapter.OnSearchResultClick, SearchAdap
                     cocktail.id = cocktailObject.getInt("idDrink")
                     cocktail.type = 1
 
-                    searchAdapter!!.addCocktail(cocktail)
-                    Handler().postDelayed({view?.searchingLayout!!.visibility = View.GONE}, 1500)
+                    searchAdapter?.addCocktail(cocktail)
+                    Handler().postDelayed({view?.searchingLayout?.visibility = View.GONE}, 1500)
                 }
 
             } catch (e: JSONException) {
                 Log.d(javaClass.simpleName, "Json Exception: $e.localizedMessage")
-                Handler().postDelayed({view?.searchingLayout!!.visibility = View.GONE}, 1500)
+                Handler().postDelayed({view?.searchingLayout?.visibility = View.GONE}, 1500)
             }
         }, Response.ErrorListener {
             Log.d(javaClass.simpleName, "Response error: $it.localizedMessage")
-            Handler().postDelayed({view?.searchingLayout!!.visibility = View.GONE}, 1500)
+            Handler().postDelayed({view?.searchingLayout?.visibility = View.GONE}, 1500)
         })
 
         BartenderSingleton.getInstance(activity).addToRequestQueue(fetchCocktails)
@@ -138,21 +136,21 @@ class SearchFragment : Fragment(), SearchAdapter.OnSearchResultClick, SearchAdap
         val intent = Intent(activity, CocktailActivity::class.java)
         intent.putExtra("cocktail", model)
         startActivity(intent)
-        activity!!.overridePendingTransition(R.anim.enter_b, R.anim.exit_a)
+        activity?.overridePendingTransition(R.anim.enter_b, R.anim.exit_a)
     }
 
     override fun onSearchHistoryClick(model: HomeModel?) {
         val intent = Intent(activity, CocktailActivity::class.java)
         intent.putExtra("cocktail", model)
         startActivity(intent)
-        activity!!.overridePendingTransition(R.anim.enter_b, R.anim.exit_a)
+        activity?.overridePendingTransition(R.anim.enter_b, R.anim.exit_a)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        view?.searchingLayout!!.visibility = View.VISIBLE
+        view?.searchingLayout?.visibility = View.VISIBLE
 
-        Handler().postDelayed({searchCocktails(query!!.trim())}, 2000)
-        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        Handler().postDelayed({searchCocktails(query?.trim())}, 2000)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
         return true
     }
@@ -164,7 +162,7 @@ class SearchFragment : Fragment(), SearchAdapter.OnSearchResultClick, SearchAdap
         return true
     }
 
-    fun onBackPressed():Boolean = when(view?.searchView!!.isSearchOpen){
+    fun onBackPressed():Boolean = when(view?.searchView?.isSearchOpen){
         true->{
             searchView.closeSearch()
             stop()
@@ -174,9 +172,9 @@ class SearchFragment : Fragment(), SearchAdapter.OnSearchResultClick, SearchAdap
     }
 
     private var myRunnable: Runnable = Runnable {
-        if(query!!.isNotEmpty() && query!!.isNotBlank()){
-            view?.searchingLayout!!.visibility = View.VISIBLE
-            searchCocktails(query!!)
+        if(query?.isNotEmpty()!! && query?.isNotBlank()!!){
+            view?.searchingLayout?.visibility = View.VISIBLE
+            searchCocktails(query)
         }
     }
 

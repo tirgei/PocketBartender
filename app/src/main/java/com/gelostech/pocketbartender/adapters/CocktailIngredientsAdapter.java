@@ -3,8 +3,8 @@ package com.gelostech.pocketbartender.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +47,16 @@ public class CocktailIngredientsAdapter extends RecyclerView.Adapter<CocktailIng
     public void addIngredient(String i){
         ingredients.add(i);
         notifyDataSetChanged();
+    }
+
+    public String getIngredients() {
+        String items = null;
+
+        for (int i = 0; i == ingredients.size(); i++){
+             items = i + ". " + ingredients.get(i) + "\n";
+        }
+
+        return items;
     }
 
     @NonNull
