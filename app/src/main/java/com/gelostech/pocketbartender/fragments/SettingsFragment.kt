@@ -1,24 +1,15 @@
 package com.gelostech.pocketbartender.fragments
 
 
-import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-
+import androidx.fragment.app.Fragment
 import com.gelostech.pocketbartender.R
-
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.gelostech.pocketbartender.activities.MainActivity
 import com.gelostech.pocketbartender.commoners.BartenderUtil
 import com.gelostech.pocketbartender.utils.setFont
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 /**
