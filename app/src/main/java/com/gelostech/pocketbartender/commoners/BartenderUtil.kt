@@ -10,9 +10,6 @@ import com.google.gson.Gson
 import java.io.ByteArrayOutputStream
 
 
-/**
- * Created by tirgei on 3/12/18.
- */
 object BartenderUtil{
 
     const val HOME_ALCOHOLIC = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"

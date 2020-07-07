@@ -3,26 +3,31 @@
 
     <Preference
         android:key="about"
+        android:icon="@drawable/ic_info_outline_black_24dp"
         android:title="About"
         android:summary="About Pocket Bartender"/>
 
     <Preference
         android:key="more"
+        android:icon="@drawable/ic_more_black_24dp"
         android:title="More apps"
         android:summary="Check out more apps" />
 
     <Preference
         android:key="send_link"
+        android:icon="@drawable/ic_share_black_24dp"
         android:title="Share this application"
         android:summary="Share the download link to friends" />
 
     <Preference
         android:key="rate_app"
+        android:icon="@drawable/ic_rate_review_black_24dp"
         android:title="Rate this application"
         android:summary="Give us a rating :)" />
 
     <Preference
         android:key="contact_dev"
+        android:icon="@drawable/ic_email_black_24dp"
         android:title="Email Developer"
         android:summary="Provide feedback to the app developer" />
 

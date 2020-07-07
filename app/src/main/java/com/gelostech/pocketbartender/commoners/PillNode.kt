@@ -13,9 +13,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import com.gelostech.pocketbartender.R
 
-/**
- * Created by Bdan on 3/17/2018.
- */
 class PillNode(context: Context,attrs:AttributeSet?) : RecyclerView(context,attrs) {
 
     private var listener:PillListener? = null
