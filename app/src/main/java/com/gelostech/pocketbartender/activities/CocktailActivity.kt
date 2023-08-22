@@ -61,7 +61,6 @@ class CocktailActivity : AppCompatActivity() {
     private var moreCocktails: MutableList<HomeModel>? = null
     private var moreAdapter: MoreAdapter? = null
     private var fave: MenuItem? = null
-    private var download: MenuItem? = null
     private var db: DatabaseHelper? = null
     private var id: Int = 0
     private var name: String? = null
@@ -192,11 +191,8 @@ class CocktailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.cocktail_toolbar_menu, menu)
-        download = menu.getItem(0)
-        fave = menu.getItem(1)
-
+        fave = menu.getItem(0)
         fave?.icon = if (faved) favedItem else unfavedItem
-        download?.icon = downloadItem
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -205,7 +201,6 @@ class CocktailActivity : AppCompatActivity() {
             android.R.id.home -> onBackPressed()
 
             R.id.fave_cocktail -> favoriteItem()
-            R.id.download_image -> sharePost()
 
             else -> {
             }

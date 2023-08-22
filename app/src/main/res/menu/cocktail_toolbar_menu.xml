@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="download"
-        android:id="@+id/download_image"
-        app:showAsAction="always"
-        android:orderInCategory="100"/>
-
-    <item
         android:title="@string/fave_cocktail"
         android:id="@+id/fave_cocktail"
         app:showAsAction="always"
